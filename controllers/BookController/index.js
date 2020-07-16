@@ -1,5 +1,5 @@
-const search = require('./actions/search');
+const store = require('./actions/store');
 
 module.exports = {
-  search,
+  store,
 }

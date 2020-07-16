@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('./controllers/UserController');
+const SearchController = require('./controllers/SearchController');
 const BookController = require('./controllers/BookController');
 
 const {auth} = UserController;
 
-router.get('/search', auth, BookController.search);
+router.get('/search', auth, SearchController.search);
+
+router.post('/book', auth, BookController.store);
 
 router.post('/signup', UserController.signup);
 router.post('/signin', UserController.signin);
