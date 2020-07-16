@@ -10,6 +10,7 @@ router.get('/search', auth, SearchController.search);
 
 router.get('/book', auth, BookController.index);
 router.post('/book', auth, BookController.store);
+router.delete('/book/:id', auth, BookController.remove);
 
 router.post('/signup', UserController.signup);
 router.post('/signin', UserController.signin);
