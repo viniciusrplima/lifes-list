@@ -27,9 +27,8 @@ async function validateUsername(payload) {
 
   if (username.length > 100) res.status(400).send(Error('Username too long'));
 
-  const hasUser = await User.find({username});
-  if (hasUser.length > 0)
-    res.status(400).send(Error('Username already exists'));
+  const hasUser = await User.find({username}).count();
+  if (hasUser > 0) res.status(400).send(Error('Username already exists'));
 
   return payload
 }

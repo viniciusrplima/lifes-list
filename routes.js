@@ -8,6 +8,7 @@ const {auth} = UserController;
 
 router.get('/search', auth, SearchController.search);
 
+router.get('/book', auth, BookController.index);
 router.post('/book', auth, BookController.store);
 
 router.post('/signup', UserController.signup);

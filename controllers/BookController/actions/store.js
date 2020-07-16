@@ -7,9 +7,10 @@ async function store(req, res) {
 
   const book = new Book({userId, bookId, bookData});
 
-  const hasBook = await Book.find({userId, bookId});
+  const hasBook =
+      await Book.find({userId}).where('bookId').equals(bookId).count();
 
-  if (hasBook.length > 0) {
+  if (hasBook > 0) {
     res.status(400).send({errormsg: 'Book already exist'});
   } else {
     book.save()
