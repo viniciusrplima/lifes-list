@@ -15,7 +15,10 @@ router.delete('/book/:id', auth, BookController.remove);
 
 router.get('/shelf', auth, ShelfController.index);
 router.post('/shelf', auth, ShelfController.store);
+router.put('/shelf/:id', auth, ShelfController.update);
 router.delete('/shelf/:id', auth, ShelfController.remove);
+router.post('/shelf/:id/', auth, ShelfController.placebook);
+router.delete('/shelf/:id/:bookId', auth, ShelfController.removebook);
 
 router.post('/signup', UserController.signup);
 router.post('/signin', UserController.signin);

@@ -4,8 +4,10 @@ async function store(req, res) {
   const {title} = req.body;
   const {_id: userId} = req.user;
 
-  if (title === '' || title === undefined)
+  if (title === '' || title === undefined) {
     res.status(400).send('title parameter required');
+    return;
+  }
 
   const shelf = new Shelf({title, userId});
   shelf.save()

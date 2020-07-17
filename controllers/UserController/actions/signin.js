@@ -6,10 +6,15 @@ async function signin(req, res) {
   const {username, password} = req.body;
   const user = await User.findOne({username});
 
-  if (user === null) res.status(400).send(Error('Username does not exist!'));
+  if (user === null) {
+    res.status(400).send(Error('Username does not exist!'));
+    return;
+  }
 
-  if (!bcrypt.compareSync(password, user.password))
+  if (!bcrypt.compareSync(password, user.password)) {
     res.status(400).send(Error('Error in password'));
+    return;
+  }
 
   const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
 

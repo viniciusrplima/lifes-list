@@ -23,12 +23,21 @@ async function validateUsername(payload) {
   const {res} = payload;
   const {username} = payload.user;
 
-  if (username.length < 3) res.status(400).send(Error('Username too short'));
+  if (username.length < 3) {
+    res.status(400).send(Error('Username too short'));
+    throw Error('Username too short');
+  }
 
-  if (username.length > 100) res.status(400).send(Error('Username too long'));
+  if (username.length > 100) {
+    res.status(400).send(Error('Username too long'));
+    throw Error('Username too long');
+  }
 
   const hasUser = await User.find({username}).count();
-  if (hasUser > 0) res.status(400).send(Error('Username already exists'));
+  if (hasUser > 0) {
+    res.status(400).send(Error('Username already exists'));
+    throw Error('Username already exists');
+  }
 
   return payload
 }
@@ -37,9 +46,15 @@ async function validatePassword(payload) {
   const {res} = payload;
   const {password} = payload.user;
 
-  if (password.length < 3) res.status(400).send(Error('Password too small'));
+  if (password.length < 3) {
+    res.status(400).send(Error('Password too small'));
+    throw Error('Password too small');
+  }
 
-  if (password.length > 100) res.status(400).send(Error('Password too large'));
+  if (password.length > 100) {
+    res.status(400).send(Error('Password too large'));
+    throw Error('Password too large');
+  }
 
   return payload;
 }
