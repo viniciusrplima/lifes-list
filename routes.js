@@ -22,5 +22,6 @@ router.delete('/shelf/:id/:bookId', auth, ShelfController.removebook);
 
 router.post('/signup', UserController.signup);
 router.post('/signin', UserController.signin);
+router.put('/user/edit', auth, UserController.edit);
 
 module.exports = router;
