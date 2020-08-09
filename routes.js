@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const UserController = require('./controllers/UserController');
 const SearchController = require('./controllers/SearchController');
 const BookController = require('./controllers/BookController');
 const ShelfController = require('./controllers/ShelfController');
+const multerConfig = require('./config/multer.js');
 
 const {auth} = UserController;
 
@@ -23,5 +25,6 @@ router.delete('/shelf/:id/:bookId', auth, ShelfController.removebook);
 router.post('/signup', UserController.signup);
 router.post('/signin', UserController.signin);
 router.put('/user/edit', auth, UserController.edit);
+router.post('/user/edit/image', auth, multer(multerConfig).single('file'), UserController.updateImage);
 
 module.exports = router;
